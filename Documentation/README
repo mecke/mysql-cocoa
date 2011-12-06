@@ -1,0 +1,49 @@
+READ ME file for MCPKit, from MySQL Cocoa project.
+
+
+++++++++++++++++++++++++++++++++
++ Aim of this Framework:
+++++++++++++++++++++++++++++++++
+
+This framework is aimed at programers which want to connect to a MySQL database from a application developed with Cocoa (and maybe GNUStep, although I've not tried myself). The framework is based on the C API of MySQL and hence uses (or include) the libmysqlclient library coming from MySQL.
+
+Objects from this framework (namely MCPConnection and MCPResult) belongs to the Model layer and uses anly the Foundation API. The development is done with XCode (the IDE from Apple -previously NeXT-), and no other environment is supported (yet !! if you want to port it to another env. I'll be glad to provide you with all the information I know which can help you).
+
+
+++++++++++++++++++++++++++++++++
++ Flavours:
+++++++++++++++++++++++++++++++++
+
+There is 2 flavours of the MCPKit framework:
+
+1. The MCPKIT_bundled is there to be included in the bundle of Cocoa applications (so that they are as much as possible self-contained, not relying on 3rd party software to be installed independantly). 
+
+2. The MCPKit_system is to be placed in one of the Library/Frameworks directory (/Library/Frameworks, ~//Library/Frameworks ...) and hence can be used when one wants to access MySQL from a Foundation tool (an Objective-C executable running from the command line, which can not have a bundle).
+
+From version 3.0, these are the only two available version of the framework, and they both rely on a statically linked version of libmysqlclient.
+
+++++++++++++++++++++++++++++++++
++ Installation:
+++++++++++++++++++++++++++++++++
+
+If you want to compile from sources, and got the libmysqlclient.a library from this distro, you might have a linking problem (the last step during building). This is due to the way 'ln' is checking that the library has a up-to-date table of content :
+The date the TOC was made (by 'ranlib') is stored in the library itself, and if 'ln' sees that the modification date is more recent, it will then complain that the TOC is most likely out-of-date.
+The easiest way to fix this is to run 'ranlib' on the library :
+
+$ cd .../MCPKit/mysql-local/lib
+$ ranlib libmysqlclient.a
+
+Then you can go back to XCode, where you can build the framework.
+
+As of this writing, I was still not able to get the Universal version of libmysqlclient ... so the framework itself is PPC only.
+
+++++++++++++++++++++++++++++++++
++ Use:
+++++++++++++++++++++++++++++++++
+
+Dave Winter (http://davidwinter.me.uk/) kindly wrote a short How-To explaining how to use the bundled version of the framework in a Cocoa application.
+You can find this document here : http://mysql-cocoa.sf.net/documentation/mysql-cocoa_bundling_in_xcode.pdf
+This was written when the framework was still called SMySQL ... so you will have to read MCPKit_bundled instead of SMySQL_bundled, but otherwise it is very accurate and complete. Thanks Dave!
+
+2006-02-26; Serge Cohen.
+

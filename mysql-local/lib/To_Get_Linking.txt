@@ -1,0 +1,7 @@
+touch -t 200506150020.33 libmysqlclient.a
+touch -t 200506150020.31 libmysqlclient_r.a
+touch -t 200506150020.47 libmysqld.a
+
+## To get the date to which each library file should be put back, use the command :
+#otool -av *.a | grep -E 'Archive|__.SYMDEF'
+## This finds the date at which the table of content was last updated.

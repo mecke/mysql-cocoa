@@ -1,0 +1,34 @@
+TO DO list for this version of SMySQL (version 2):
+
+++Updating the API doc generation to use Doxygen.
+++++++
+
+++Handling NULL fields:
+- Create a MCPNull object to reflect NULL columns values in retrieved table rows.
+- Create a "MCPNull" category for NSObject with only one method : isNSNull (Being able to check if any object returned by SMySQL is a MCPNull)
+-> Ok.
+++++++ Indeed I used the NSNull class.
+
+
+++MCPResult:
+Centralising the field type recognition and filling of proper objects:
+- A single method doing the work : fetchRowAsType:(MCPReturnType) aType;
+- Wrapper for getting rows as Dictionnary or Array.
+- Again with fetchTypesAsType: (MCPReturnType) aType; + wrappers
+-> Ok.
+
+Making a category for additional (optional) methods:
+- Getting a single column:
+    - (NSArray *) fetchColAtIndex:(unsigned int) aCol;
+    - (NSArray *) fetchColWithName:(NSString *) aColName; (Wrapping the previous one)
+- Adding bidimensional array data retrieval (in a Category?)
+-> Ok
+
+++MCPConnection
+Making a category to add some useful (but not mandatory) features:
+- (id) getFirstFieldFromQuery:(NSString *) query; (Frist column of first row of the result)
+- (id) getFirstRowFromQuery:(NSString *) query asType:(MCPReturnType) aType; (obvious)
+- (NSArray *) getAllRowsFromQuery:(NSString *) query asType:(MCPReturnType) aType; (using 2D possibility of MCPResult)
+- (NSArray *) getQuery:(NSString *) query colWithIndex:(unsigned int) aCol; (Getting a single column form the query)
+- (NSArray *) getQuery:(NSString *) query colWithName:(NSString *) aColName;
+-> Ok

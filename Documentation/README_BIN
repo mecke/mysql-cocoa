@@ -1,0 +1,45 @@
+READ ME file for MCPKit, from MySQL Cocoa project.
+For the BINARIES distribution.
+
+
+++++++++++++++++++++++++++++++++
++ Aim of this Framework:
+++++++++++++++++++++++++++++++++
+
+This framework is aimed at programers which want to connect to a MySQL database from a application developed with Cocoa (and maybe GNUStep, although I've not tried myself). The framework is based on the C API of MySQL and hence uses (or include) the libmysqlclient library coming from MySQL.
+
+Objects from this framework (namely MCPConnection and MCPResult) belongs to the Model layer and uses anly the Foundation API. The development is done with XCode (the IDE from Apple -previously NeXT-), and no other environment is supported (yet !! if you want to port it to another env. I'll be glad to provide you with all the information I know which can help you).
+
+
+++++++++++++++++++++++++++++++++
++ Flavours:
+++++++++++++++++++++++++++++++++
+There is 2 flavours of the MCPKit framework:
+
+1. The MCPKIT_bundled is there to be included in the bundle of Cocoa applications (so that they are as much as possible self-contained, not relying on 3rd party software to be installed independantly). 
+
+2. The MCPKit_system is to be placed in one of the Library/Frameworks directory (/Library/Frameworks, ~//Library/Frameworks ...) and hence can be used when one wants to access MySQL from a Foundation tool (an Objective-C executable running from the command line, which can not have a bundle).
+
+From version 3.0, these are the only two available version of the framework, and they both rely on a statically linked version of libmysqlclient.
+
+
+++++++++++++++++++++++++++++++++
++ Installation:
+++++++++++++++++++++++++++++++++
+
+PLEASE, read the preceding section (Flavours) if you wounder which framework you want to use for your own application.
+
+If you want to bundle MCPKit within your Cocoa application, you have to follow the steps described in the document (nicely provided by Dave Winter -http://davidwinter.me.uk/-):
+http://mysql-cocoa.sf.net/documentation/mysql-cocoa_bundling_in_xcode.pdf
+
+If you want to use the MCPKit for a command line tool, you have to install the MCPKit_system version of the framework, and place it in one of the Library/Frameworks directory.
+
+++++++++++++++++++++++++++++++++
++ Use:
+++++++++++++++++++++++++++++++++
+
+In the source distribution, you'll find test case, which are a good starting point to how the framework works...
+I currently have some trouble with the auto-generated documentation, as I'm trying to move away from the (old) autodoc to doxygen. So you'll have to wait to get the API reference documentation. Sorry about that.
+
+2006-02-26; Serge Cohen.
+
